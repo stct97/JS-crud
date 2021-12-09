@@ -13,6 +13,17 @@ export default class Model {
         return this.todos;
     }
 
+    findTodo(id){
+        const index = this.todos.findIndex((todo) => todo.id === id);
+    }
+    toggleCompleted(id){
+        console.log(id)
+        const index = this.findTodo(id);
+        const todo = this.todos[index];
+        todo.completed = !todo.completed;
+        console.log(this.todos);
+    }
+
     addTodo(title, description) {
         const todo = {
             id: this.currentID++,
@@ -25,5 +36,11 @@ export default class Model {
 
         //Object.assign({},todo)
         return { ...todo }
+    }
+
+    removeTodo(id) {
+        const index = this.findTodo(id);
+        console.log(this.todos[index])
+        this.todos.splice(index, 1);
     }
 }
